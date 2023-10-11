@@ -1,0 +1,51 @@
+#root{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 4%;
+
+    header{
+        background-color: #1976d2e4;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+
+        span{
+            color: orange;
+        }
+    }
+
+    .body{
+        display: flex;
+        gap: 1%;
+        align-items: flex-start;
+
+    form{
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.5rem;
+        padding:1rem;
+        width: 40%;
+        border: 1px solid black;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .rightside{
+        display: flex;
+        flex-direction: column;
+        width: 59%;
+    }
+
+    section{
+        display: inline-block;
+        // width: 59%;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding:1rem;
+    }
+
+}
+}
+
+

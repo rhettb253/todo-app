@@ -1,7 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import useForm from '../../hooks/form';
-
 import { v4 as uuid } from 'uuid';
+import Header from '../Header';
+import Form from '../Form';
+import FullList from '../FullList';
+import ShortList from '../ShortList';
+import { Button } from '@mui/material';
+import './Todo.scss';
+
+export const Context = createContext();
 
 const Todo = () => {
 
@@ -10,6 +17,7 @@ const Todo = () => {
   });
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
+  const [showFullList, setShowFullList] = useState(false);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
@@ -37,6 +45,10 @@ const Todo = () => {
 
   }
 
+  function toggleList() {
+    setShowFullList(!showFullList);
+  }
+
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
@@ -47,46 +59,17 @@ const Todo = () => {
   }, [list]);  
 
   return (
-    <>
-      <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
-      </header>
-
-      <form onSubmit={handleSubmit}>
-
-        <h2>Add To Do Item</h2>
-
-        <label>
-          <span>To Do Item</span>
-          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-        </label>
-
-        <label>
-          <span>Assigned To</span>
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-        </label>
-
-        <label>
-          <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
-        </label>
-
-        <label>
-          <button type="submit">Add Item</button>
-        </label>
-      </form>
-
-      {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
+    <Context.Provider value={{incomplete, list, toggleComplete, handleChange, handleSubmit, defaultValues}}>
+      <Header />
+      <div className='body'>
+        <Form />
+        <div className='rightside'>
+        <Button variant="contained" onClick={toggleList}>{showFullList ? 'View Short List' : 'View Full List'}</Button>
+        {showFullList && <FullList />}
+        {!showFullList && <ShortList />}
         </div>
-      ))}
-
-    </>
+      </div>
+    </Context.Provider>
   );
 };
 

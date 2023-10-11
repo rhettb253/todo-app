@@ -2,6 +2,8 @@
 
 This is a simple Todo application built with Vite and React, leveraging the Context API for state management.
 
+![uml](ToDoUML.png)
+
 ## Features
 
 - Add new tasks to your todo list.
