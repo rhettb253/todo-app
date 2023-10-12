@@ -18,6 +18,7 @@ const Todo = () => {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   const [showFullList, setShowFullList] = useState(false);
+  const [showComplete, setShowComplete] = useState(false);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
@@ -59,14 +60,17 @@ const Todo = () => {
   }, [list]);  
 
   return (
-    <Context.Provider value={{incomplete, list, toggleComplete, handleChange, handleSubmit, defaultValues}}>
+    <Context.Provider value={{incomplete, list, toggleComplete, handleChange, handleSubmit, defaultValues, showComplete}}>
       <Header />
       <div className='body'>
         <Form />
         <div className='rightside'>
-        <Button variant="contained" onClick={toggleList}>{showFullList ? 'View Short List' : 'View Full List'}</Button>
-        {showFullList && <FullList />}
-        {!showFullList && <ShortList />}
+          <div className='buttons'>
+          <Button variant="contained" onClick={toggleList}>{showFullList ? 'View Short List' : 'View Full List'}</Button>
+          <Button variant="contained" onClick={()=>setShowComplete(!showComplete)}>{showComplete ? 'Hide Completed Jobs' :'View Completed Jobs'}</Button>
+          </div>
+          {showFullList && <FullList />}
+          {!showFullList && <ShortList />}
         </div>
       </div>
     </Context.Provider>
