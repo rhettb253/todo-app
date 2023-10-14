@@ -4,7 +4,6 @@ import { v4 as uuid } from 'uuid';
 import Header from '../Header';
 import Form from '../Form';
 import FullList from '../FullList';
-import ShortList from '../ShortList';
 import { Button } from '@mui/material';
 import './Todo.scss';
 
@@ -60,7 +59,7 @@ const Todo = () => {
   }, [list]);  
 
   return (
-    <Context.Provider value={{incomplete, list, toggleComplete, handleChange, handleSubmit, defaultValues, showComplete}}>
+    <Context.Provider value={{incomplete, list, toggleComplete, handleChange, handleSubmit, defaultValues, showComplete, showFullList}}>
       <Header />
       <div className='body'>
         <Form />
@@ -69,8 +68,7 @@ const Todo = () => {
           <Button variant="contained" onClick={toggleList}>{showFullList ? 'View Short List' : 'View Full List'}</Button>
           <Button variant="contained" onClick={()=>setShowComplete(!showComplete)}>{showComplete ? 'Hide Completed Jobs' :'View Completed Jobs'}</Button>
           </div>
-          {showFullList && <FullList />}
-          {!showFullList && <ShortList />}
+          <FullList />
         </div>
       </div>
     </Context.Provider>
