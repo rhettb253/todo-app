@@ -3,7 +3,7 @@ import { Context } from '../Todo';
 import { Button } from '@mui/material';
 
 function Form() {
-  const { handleChange, handleSubmit, defaultValues } = useContext(Context);
+  const { handleChange, handleSubmit, defaultValues} = useContext(Context);
 
   return (
     <form onSubmit={handleSubmit}>

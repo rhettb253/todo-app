@@ -4,10 +4,10 @@ import { v4 as uuid } from 'uuid';
 import Header from '../Header';
 import Form from '../Form';
 import FullList from '../FullList';
-import { Button } from '@mui/material';
+import Settings from '../Settings';
 import './Todo.scss';
 
-export const Context = createContext();
+export const Context = createContext(null);
 
 const Todo = () => {
 
@@ -18,6 +18,7 @@ const Todo = () => {
   const [incomplete, setIncomplete] = useState([]);
   const [showFullList, setShowFullList] = useState(false);
   const [showComplete, setShowComplete] = useState(false);
+  const [showAddJobOrSettings, setShowAddJobOrSettings] = useState('addJob');
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
@@ -59,14 +60,13 @@ const Todo = () => {
   }, [list]);  
 
   return (
-    <Context.Provider value={{incomplete, list, toggleComplete, handleChange, handleSubmit, defaultValues, showComplete, showFullList}}>
+    <Context.Provider value={{setShowComplete, toggleList, setShowAddJobOrSettings, incomplete, list, toggleComplete, handleChange, handleSubmit, defaultValues, showComplete, showFullList}}>
       <Header />
       <div className='body'>
-        <Form />
+        {showAddJobOrSettings === 'addJob' && <Form />}
+        {showAddJobOrSettings === 'settings' && <Settings />}
         <div className='rightside'>
           <div className='buttons'>
-          <Button variant="contained" onClick={toggleList}>{showFullList ? 'View Short List' : 'View Full List'}</Button>
-          <Button variant="contained" onClick={()=>setShowComplete(!showComplete)}>{showComplete ? 'Hide Completed Jobs' :'View Completed Jobs'}</Button>
           </div>
           <FullList />
         </div>
