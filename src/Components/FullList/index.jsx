@@ -3,7 +3,7 @@ import { Context } from "../Todo";
 import { Button, Stack, Pagination } from "@mui/material";
 
 function FullList() {
-  const { list, toggleComplete, showComplete } = useContext(Context);
+  const { list, toggleComplete, showComplete, showFullList } = useContext(Context);
   const [showItem, setShowItem] = useState();
 
   function formatList(e) {
@@ -15,7 +15,7 @@ function FullList() {
     <>
     <Stack spacing={1}>
       <p>Bring a job to the top:</p>
-      <Pagination count={list.length} variant="outlined" color="primary" onClick={formatList} />
+      <Pagination hideNextButton hidePrevButton count={list.length} variant="outlined" color="primary" onClick={formatList} />
     </Stack>
     {!isNaN(showItem) && <div className="highlight" key={list[showItem].id}>
           <p>{list[showItem].text}</p>
@@ -27,7 +27,7 @@ function FullList() {
           <hr />
     </div>}
     <section>
-      {list.map((item, idx) => {
+      {showFullList ? list.map((item, idx) => {
         if (item.complete && !showComplete) {
           return null;
         } else {
@@ -40,7 +40,23 @@ function FullList() {
           </Button>
           <hr />
         </div>
-      }})}
+      }})
+      :
+      list.map((item) => {
+        if (item.complete && !showComplete) {
+          return null;
+        } else {
+        return <div key={item.id}>
+          <p>{'Job: ' + item.text}</p>
+          <p><small>Assigned to: {item.assignee}</small></p>
+          <p><small>Difficulty: {item.difficulty}</small></p>
+          <Button color={item.complete ? "success" : "error"} onClick={() => toggleComplete(item.id)} >
+            Complete: {item.complete.toString()}
+          </Button>
+          <hr />
+        </div>
+      }}).slice(0, 3)
+      }
     </section>
     </>
   );
