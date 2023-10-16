@@ -5,6 +5,14 @@ import { Context } from "../Todo";
 function Settings() {
   const { setShowComplete, toggleList, showFullList, showComplete } = useContext(Context);
 
+  const toggleShowComplete = () => {
+    setShowComplete((prev) => {
+      const newShowComplete = !prev
+      localStorage.setItem("showComplete", JSON.stringify(newShowComplete));
+      return newShowComplete;
+    });
+  }
+
   return (
     <div className="settings">
       <h2>Display Settings</h2>
@@ -13,7 +21,7 @@ function Settings() {
       </Button>
       <Button
         variant="contained"
-        onClick={() => setShowComplete(!showComplete)}
+        onClick={toggleShowComplete}
       >
         {showComplete ? "Hide Completed Jobs" : "View Completed Jobs"}
       </Button>
