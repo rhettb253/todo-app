@@ -1,17 +1,31 @@
-import {useContext} from 'react';
-import { Context } from '../Todo';
-import { Button } from '@mui/material';
+import { useContext } from "react";
+import { Context } from "../Todo";
+import { Button } from "@mui/material";
+import LoginProvider from "../auth/context";
+import Login from "../auth/login";
 
 function Header() {
-  const {incomplete, setShowAddJobOrSettings } = useContext(Context);
-  
+  const { setShowAddJobOrSettings } = useContext(Context);
+
   return (
     <header data-testid="todo-header">
-      <h1 data-testid="todo-h1">To Do List: <span className='pending'>{incomplete} items pending</span></h1>
       <div>
-      <Button color='inherit' onClick={() => setShowAddJobOrSettings('addJob')}>Add Job</Button>
-      <Button color='inherit' onClick={() => setShowAddJobOrSettings('settings')}>Settings</Button>
+        <Button
+          color="inherit"
+          onClick={() => setShowAddJobOrSettings("addJob")}
+        >
+          Add Job
+        </Button>
+        <Button
+          color="inherit"
+          onClick={() => setShowAddJobOrSettings("settings")}
+        >
+          Settings
+        </Button>
       </div>
+        <LoginProvider>
+          <Login />
+        </LoginProvider>
     </header>
   );
 }
