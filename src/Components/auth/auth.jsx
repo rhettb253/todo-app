@@ -1,15 +1,28 @@
 import { useContext } from "react";
-import { When } from "react-if";
-
 import { LoginContext } from "./context.jsx";
 
 const Auth = (props) => {
   const context = useContext(LoginContext);
   const isLoggedIn = context.loggedIn;
-  const canDo = props.capability ? context.can(props.capability) : true;
-  const okToRender = isLoggedIn && canDo;
 
-  return <When condition={okToRender}>{props.children}</When>;
+  const capability = () => {
+    if (context.user.capabilities.includes('delete')) return 'admin';
+    if (context.user.capabilities.includes('update')) return 'editor';
+    if (context.user.capabilities.includes('create')) return 'writer';
+    if (context.user.capabilities.includes('read')) return 'user';
+  }
+
+  const access = capability();
+
+  return (
+    <>
+      {props.children}
+        {/* {isLoggedIn && access === 'admin' && <p>admin</p>}
+        {isLoggedIn && access === 'editor' && <p>editor</p>}
+        {isLoggedIn && access === 'writer' && <p>writer</p>}
+        {isLoggedIn && access === 'user' && <p>user</p>} */}
+    </>
+    );
 };
 
 export default Auth;

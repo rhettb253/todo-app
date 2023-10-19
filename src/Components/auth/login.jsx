@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { When } from "react-if";
-
 import { LoginContext } from "./context.jsx";
+
+import Auth from "./auth.jsx";
 
 const Login = () => {
   const context = useContext(LoginContext);
@@ -18,25 +18,27 @@ const Login = () => {
 
   return (
     <>
-      <When condition={context.loggedIn}>
-        <button onClick={context.logout}>Log Out</button>
-      </When>
+      {context.loggedIn &&
+      <div>
+        <button id='log' onClick={context.logout}>Log Out</button><Auth />
+        </div>}
+      
 
-      <When condition={!context.loggedIn}>
+      {!context.loggedIn &&
         <form onSubmit={handleSubmit}>
           <input
-            placeholder="UserName"
+            placeholder="Username"
             name="username"
             onChange={handleChange}
           />
           <input
-            placeholder="password"
+            placeholder="Password"
             name="password"
             onChange={handleChange}
           />
-          <button>Login</button>
+          <button id='log'>Login</button> 
         </form>
-      </When>
+      }
     </>
   );
 };

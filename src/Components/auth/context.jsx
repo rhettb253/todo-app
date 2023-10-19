@@ -38,9 +38,9 @@ const LoginProvider = (props) => {
     error: null,
   });
 
-  const can = (capability) => {
-    return state?.user?.capabilities?.includes(capability);
-  };
+//   const can = (capability) => {
+//     return state?.user?.capabilities?.includes(capability);
+//   };
 
   const validateToken = useCallback((token) => {
     try {
@@ -83,16 +83,9 @@ const LoginProvider = (props) => {
     validateToken(token);
   }, [state.user.name, validateToken]);
 
-  // componentDidMount() {
-  //   const qs = new URLSearchParams(window.location.search);
-  //   const cookieToken = cookie.load("auth");
-  //   const token = qs.get("token") || cookieToken || null;
-  //   validateToken(token);
-  // }
-
   return (
     <LoginContext.Provider
-      value={{ ...state, can: can, login: login, logout: logout }}
+      value={{ ...state, login: login, logout: logout }}
     >
       {props.children}
     </LoginContext.Provider>
