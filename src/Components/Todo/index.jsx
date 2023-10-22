@@ -84,7 +84,7 @@ const Todo = () => {
     <Context.Provider value={{setShowComplete, toggleList, setShowAddJobOrSettings, incomplete, list, toggleComplete, handleChange, handleSubmit, defaultValues, showComplete, showFullList}}>
       <Header />
       <div className='body'>
-        {showAddJobOrSettings === 'addJob' && <Form />}
+          {showAddJobOrSettings === 'addJob' && <Form />}
         {showAddJobOrSettings === 'settings' && <Settings />}
         <div className='rightside'>
           <div className='buttons'>
