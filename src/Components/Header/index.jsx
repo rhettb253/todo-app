@@ -8,12 +8,16 @@ function Header() {
 
   return (
     <header data-testid="todo-header">
-      <h1 data-testid="todo-h1">To Do List: <span className='pending'>{incomplete} items pending</span></h1>
       <div>
+
       <Button color='inherit' onClick={() => setShowAddJobOrSettings('addJob')}>Add Job</Button>
       <Button color='inherit' onClick={() => setShowAddJobOrSettings('settings')}>Settings</Button>
       <Login />
+
       </div>
+        <LoginProvider>
+          <Login />
+        </LoginProvider>
     </header>
   );
 }
