@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Context } from "../Todo";
 import { Button, Stack, Pagination } from "@mui/material";
+import Auth from "../../Auth/AuthWrap";
 
 function FullList() {
   const { list, toggleComplete, showComplete, showFullList } =
@@ -78,19 +79,27 @@ function FullList() {
                 } else {
                   return (
                     <div key={item.id}>
-                      <p>{idx + 1 + ". " + item.text}</p>
+                      <div style={{display:'flex', justifyContent:'space-between'}}>
+                        <p>{idx + 1 + ". " + item.text}</p>
+                        <Auth capability='delete'>
+                          <Button color="error">Delete</Button>
+                        </Auth>
+                      </div>
                       <p>
                         <small>Assigned to: {item.assignee}</small>
                       </p>
                       <p>
                         <small>Difficulty: {item.difficulty}</small>
                       </p>
-                      <Button
-                        color={item.complete ? "success" : "error"}
-                        onClick={() => toggleComplete(item.id)}
-                      >
-                        Complete: {item.complete.toString()}
-                      </Button>
+                      <p style={{display:'inline', color:item.complete ? "green" : "red"}}>Complete: {item.complete.toString()}</p>
+                      <Auth capability='update'>
+                        <Button
+                          color={item.complete ? "success" : "error"}
+                          onClick={() => toggleComplete(item.id)}
+                        >
+                          toggle
+                        </Button>
+                      </Auth>
                       <hr />
                     </div>
                   );

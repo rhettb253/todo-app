@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Context } from '../Todo';
 import { Button } from '@mui/material';
+import Auth from '../../Auth/AuthWrap';
 
 function Form() {
   const { handleChange, handleSubmit, defaultValues} = useContext(Context);
@@ -26,7 +27,11 @@ function Form() {
         </label>
 
         <label>
-          <Button variant="contained" type="submit" >Add Item</Button>
+
+        <Auth capability='create'>
+          <Button variant="contained" type="submit">Add Item</Button>
+        </Auth>
+
         </label>
       </form>
   )

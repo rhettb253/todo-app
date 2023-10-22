@@ -78,32 +78,13 @@ const Todo = () => {
   }, [list]);
 
   return (
-    <Context.Provider
-      value={{
-        setShowComplete,
-        toggleList,
-        setShowAddJobOrSettings,
-        incomplete,
-        list,
-        toggleComplete,
-        handleChange,
-        handleSubmit,
-        defaultValues,
-        showComplete,
-        showFullList,
-      }}
-    >
-        <Header />
-        <h1 data-testid="todo-h1">
-          To Do List:{" "}
-          <span className="pending">{incomplete} items pending</span>
-        </h1>
-        <Auth>
-        <div className="body">
-          {showAddJobOrSettings === "addJob" && <Form />}
-          {showAddJobOrSettings === "settings" && <Settings />}
-          <div className="rightside">
-            <FullList />
+    <Context.Provider value={{setShowComplete, toggleList, setShowAddJobOrSettings, incomplete, list, toggleComplete, handleChange, handleSubmit, defaultValues, showComplete, showFullList}}>
+      <Header />
+      <div className='body'>
+          {showAddJobOrSettings === 'addJob' && <Form />}
+        {showAddJobOrSettings === 'settings' && <Settings />}
+        <div className='rightside'>
+          <div className='buttons'>
           </div>
         </div>
         </Auth>
