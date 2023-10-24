@@ -125,6 +125,7 @@ const Todo = () => {
           </div>
           <FullList />
         </div>
+      </div>
     </Context.Provider>
   );
 };

@@ -2,6 +2,7 @@ import {useContext} from 'react';
 import { Context } from '../Todo';
 import { Button } from '@mui/material';
 import Login from '../../Auth/Login';
+import LoginProvider from '../../Auth/LoginProvider';
 
 function Header() {
   const {incomplete, setShowAddJobOrSettings } = useContext(Context);
@@ -12,7 +13,7 @@ function Header() {
 
       <Button color='inherit' onClick={() => setShowAddJobOrSettings('addJob')}>Add Job</Button>
       <Button color='inherit' onClick={() => setShowAddJobOrSettings('settings')}>Settings</Button>
-      <Login />
+      {/* <Login /> */}
 
       </div>
         <LoginProvider>
