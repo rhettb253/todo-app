@@ -123,8 +123,8 @@ const Todo = () => {
         <div className='rightside'>
           <div className='buttons'>
           </div>
+          <FullList />
         </div>
-        </Auth>
     </Context.Provider>
   );
 };
