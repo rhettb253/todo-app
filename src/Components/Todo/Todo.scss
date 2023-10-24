@@ -10,12 +10,24 @@
         align-items: center;
         background-color: #1976d2e4;
         padding: 0.5rem 1rem;
-        margin-bottom: 1rem;
         border-radius: 5px;
 
         span{
             color: rgb(255, 166, 0);
         }
+
+        #log{
+                background-color: orange;
+        }
+
+    }
+
+    h1{
+        margin: 1rem auto;
+        background-color: orange;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        width: fit-content;
     }
 
     .body{

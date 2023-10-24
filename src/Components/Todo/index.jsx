@@ -11,7 +11,6 @@ import axios from 'axios';
 export const Context = createContext(null);
 
 const Todo = () => {
-
   const [defaultValues] = useState({
     difficulty: 4,
   });
@@ -34,7 +33,7 @@ const Todo = () => {
     const initialValue = JSON.parse(savedShowComplete);
     return initialValue || false;
   });
-  const [showAddJobOrSettings, setShowAddJobOrSettings] = useState('addJob');
+  const [showAddJobOrSettings, setShowAddJobOrSettings] = useState("addJob");
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   async function makeRequest(config, doNext) {
@@ -80,7 +79,7 @@ const Todo = () => {
   }
 
   function deleteItem(id) {
-    const items = list.filter( item => item.id !== id );
+    const items = list.filter((item) => item.id !== id);
     setList(items);
   }
 
@@ -99,22 +98,21 @@ const Todo = () => {
 
   function toggleList() {
     setShowFullList((prev) => {
-      const newShowFullList = !prev
+      const newShowFullList = !prev;
       localStorage.setItem("showFullList", JSON.stringify(newShowFullList));
       return newShowFullList;
     });
   }
 
   useEffect(() => {
-    let incompleteCount = list.filter(item => !item.complete).length;
+    let incompleteCount = list.filter((item) => !item.complete).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
     localStorage.setItem("list", JSON.stringify(list));
-    // linter will want 'incomplete' added to dependency array unnecessarily. 
-    // disable code used to avoid linter warning 
+    // linter will want 'incomplete' added to dependency array unnecessarily.
+    // disable code used to avoid linter warning
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [list]);  
-
+  }, [list]);
 
   return (
     <Context.Provider value={{setShowComplete, toggleList, setShowAddJobOrSettings, incomplete, list, toggleComplete, handleChange, handleSubmit, defaultValues, showComplete, showFullList}}>
@@ -125,9 +123,8 @@ const Todo = () => {
         <div className='rightside'>
           <div className='buttons'>
           </div>
-          <FullList />
         </div>
-      </div>
+        </Auth>
     </Context.Provider>
   );
 };

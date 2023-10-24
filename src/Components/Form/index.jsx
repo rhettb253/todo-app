@@ -27,9 +27,11 @@ function Form() {
         </label>
 
         <label>
+
         <Auth capability='create'>
           <Button variant="contained" type="submit">Add Item</Button>
         </Auth>
+
         </label>
       </form>
   )
